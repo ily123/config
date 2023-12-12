@@ -1,0 +1,17 @@
+- hosts: localhost
+  connection: local
+  become: yes 
+  vars:
+    nvim_path: "{{ lookup('env', 'HOME') }}/Downloads/nvim.appimage"
+  tasks:
+    - name: Download the latest Neovim AppImage
+      get_url:
+        url: "https://github.com/neovim/neovim/releases/latest/download/nvim.appimage"
+        dest: "{{ nvim_path }}"
+        mode: '0755'
+
+    - name: Create a symbolic link for nvim
+      file:
+        src: "{{ nvim_path }}"
+        dest: "/usr/local/bin/nvim"
+        state: link
