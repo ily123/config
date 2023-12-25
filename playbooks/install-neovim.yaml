@@ -4,6 +4,12 @@
   vars:
     nvim_path: "{{ lookup('env', 'HOME') }}/Downloads/nvim.appimage"
   tasks:
+    - name: Create download folder
+      file:
+        path: /path/to/download/folder
+        state: directory
+        mode: '0755'
+
     - name: Download the latest Neovim AppImage
       get_url:
         url: "https://github.com/neovim/neovim/releases/latest/download/nvim.appimage"
