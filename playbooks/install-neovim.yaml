@@ -2,11 +2,12 @@
   connection: local
   become: yes 
   vars:
-    nvim_path: "{{ lookup('env', 'HOME') }}/Downloads/nvim.appimage"
+    downloads: "{{ lookup('env', 'HOME') }}/Downloads"
+    nvim_path: "{{ downloads }}/nvim.appimage"
   tasks:
-    - name: Create download folder
+    - name: Create downloads folder
       file:
-        path: /path/to/download/folder
+        path: "{{ downloads }}"
         state: directory
         mode: '0755'
 

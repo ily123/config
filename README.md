@@ -1,5 +1,5 @@
 # config
-Set up dev env on Ubuntu 22.04
+Set up dev env on Ubuntu 22.04 (x86)
 
 ### Install Ansible
 ```bash
