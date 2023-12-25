@@ -5,6 +5,13 @@
     downloads: "{{ lookup('env', 'HOME') }}/Downloads"
     nvim_path: "{{ downloads }}/nvim.appimage"
   tasks:
+    # FUSE is filesystem in userspace, it's needed to run app images
+    - name: Install FUSE 
+      apt:
+        name: fuse
+        state: present
+        update_cache: yes
+
     - name: Create downloads folder
       file:
         path: "{{ downloads }}"
