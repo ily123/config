@@ -1,8 +1,11 @@
 # config
-Set up dev env quickly.
+Set up dev env on Ubuntu 22.04
 
-### Install Python and Ansible
-Coming soon. (soon = eventually)
+### Install Ansible
+```bash
+sudo apt update
+sudo apt install ansible
+```
 
 ### Install nvim
 ```bash
