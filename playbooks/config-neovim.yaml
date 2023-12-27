@@ -1,0 +1,11 @@
+- hosts: localhost
+  connection: local
+  become: yes
+  vars:
+    config: "{{ lookup('env', 'HOME') }}/.config/nvim"
+  tasks:
+    - name: Create config folder
+      file:
+        path: "{{ config }}"
+        state: directory
+        mode: '0755'
