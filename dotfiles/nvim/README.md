@@ -1,4 +1,4 @@
-# README
+# Nvim
 The configuration consists of the following modules:
 ```
 .config/nvim/
