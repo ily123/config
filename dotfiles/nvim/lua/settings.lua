@@ -6,6 +6,7 @@ set.cmdheight = 2
 set.signcolumn = "yes"  -- Always show sign column
 set.number = true
 set.statusline = set.statusline:get() .. "%F"  -- Show file path
+set.clipboard = "unnamedplus"  -- Yank now also yanks to system clipboard
 
 -- Tab Options
 set.shiftwidth = 2
