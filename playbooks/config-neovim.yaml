@@ -8,10 +8,10 @@
       file:
         path: "{{ config }}"
         state: directory
-        mode: '0755'
+        mode: '0777'
 
     - name: Copy ./dotfiles/nvim to ~/.config/nvim
       copy:
         src: "../dotfiles/nvim/"
         dest: "{{ config }}"
-        mode: '0755'
+        mode: '0777'
