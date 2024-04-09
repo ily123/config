@@ -1,11 +1,14 @@
 # config
-Set up dev env on Ubuntu 22.04 (x86)
+Set up my dev environment on Ubuntu 22.04 (x86).
 
-### Install Ansible
+### Ansible
+First, install Ansible.
+
 ```bash
 sudo apt update
 sudo apt install ansible
 ```
+Then play Ansible playbooks below.
 
 ### nvim
 ```bash
