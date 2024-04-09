@@ -34,5 +34,5 @@
     - name: Download wallpaper
       ansible.builtin.get_url:
         url: "https://i.imgur.com/aBtClJG.jpeg"
-        dest: "{{ ansible_env.HOME }}/Pictures/Firefox_wallpaper.jpeg"
+        dest: "{{ home }}/Pictures/Firefox_wallpaper.jpeg"
         mode: "0644"
