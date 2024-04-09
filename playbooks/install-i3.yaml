@@ -22,5 +22,5 @@
       ansible.builtin.copy:
         src: "../dotfiles/i3/config"
         dest: "{{ ansible_env.HOME }}/.config/i3/config"
-        mode: 0777
+        mode: "0777"
 
