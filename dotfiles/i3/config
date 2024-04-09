@@ -166,5 +166,5 @@ bar {
 
 focus_follows_mouse no
 
-exec_always feh --bg-scale Firefox_wallpaper.png
+exec_always feh --bg-scale $HOME/Pictures/Firefox_wallpaper.jpeg
 exec /home/xyz/Documents/CodeRepos/picom/build/src/picom
