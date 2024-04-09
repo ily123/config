@@ -24,3 +24,7 @@
         dest: "{{ ansible_env.HOME }}/.config/i3/config"
         mode: "0777"
 
+    - name: Install feh image viewer so I can set wallpaper
+      ansible.builtin.apt:
+      name: feh
+      state: present
