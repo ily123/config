@@ -1,4 +1,9 @@
+# -------------------------------
 # This is a single-screen set up.
+#
+# Good article for more bells and whistles:
+# https://www.makeuseof.com/things-to-do-after-installing-i3wm/
+# --------------------------------
 
 exec --no-startup-id gnome-settings-daemon
 
