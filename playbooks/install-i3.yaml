@@ -18,7 +18,7 @@
         path: ~/.config/i3
         state: directory
     
-    - name: Fetch i3 config file from remote host
+    - name: Copy config file to config folder
       ansible.builtin.copy:
         src: "../dotfiles/i3/config"
         dest: "{{ ansible_env.HOME }}/.config/i3/config"
