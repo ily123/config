@@ -22,5 +22,5 @@
       ansible.builtin.copy:
         src: ../dotfiles/i3/config
         dest: ~/.config/i3/config
-        flat: yes
-        validate_checksum: yes
+        mode: 0777
+
