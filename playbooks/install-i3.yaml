@@ -12,3 +12,15 @@
       ansible.builtin.apt:
         name: i3
         state: present
+        
+    - name: Ensure ~/.config/i3 directory exists
+      ansible.builtin.file:
+        path: ~/.config/i3
+        state: directory
+    
+    - name: Fetch i3 config file from remote host
+      ansible.builtin.copy:
+        src: ../dotfiles/i3/config
+        dest: ~/.config/i3/config
+        flat: yes
+        validate_checksum: yes
