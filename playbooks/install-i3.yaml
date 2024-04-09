@@ -17,7 +17,7 @@
         
     - name: Ensure ~/.config/i3 directory exists
       ansible.builtin.file:
-        path: ~/.config/i3
+        path: "{{ home }}/.config/i3"
         state: directory
     
     - name: Copy config file to config folder
