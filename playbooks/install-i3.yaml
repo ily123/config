@@ -30,3 +30,9 @@
       ansible.builtin.apt:
         name: feh
         state: present
+
+    - name: Download wallpaper
+      ansible.builtin.apt:
+        url: "https://i.imgur.com/aBtClJG.jpeg"
+        dest: "{{ ansible_env.HOME }}/Pictures/Firefox_wallpaper.jpeg"
+        mode: "0644"
