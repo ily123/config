@@ -1,17 +1,27 @@
-- hosts: localhost
+- name: Install i3 window manager locally
+  hosts: localhost
   connection: local
   become: yes
   vars:
-    config: "{{ lookup('env', 'HOME') }}/.config/nvim"
+    home: "{{ lookup('env', 'HOME') }}"
   tasks:
-    - name: Create config folder
-      file:
-        path: "{{ config }}"
-        state: directory
-        mode: '0777'
+    - name: Update apt repo and cache on localhost
+      ansible.builtin.apt:
+        update_cache: yes
+        cache_valid_time: 3600
 
-    - name: Copy ./dotfiles/nvim to ~/.config/nvim
-      copy:
-        src: "../dotfiles/nvim/"
-        dest: "{{ config }}"
-        mode: '0777'
+    - name: Install i3 window manager
+      ansible.builtin.apt:
+        name: i3
+        state: present
+        
+    - name: Ensure ~/.config/i3 directory exists
+      ansible.builtin.file:
+        path: ~/.config/i3
+        state: directory
+    
+    - name: Copy config file to config folder
+      ansible.builtin.copy:
+        src: "../dotfiles/i3/config"
+        dest: "{{ home }}/.config/i3/config"
+        mode: "0644"
