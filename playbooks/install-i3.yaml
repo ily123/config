@@ -1,0 +1,14 @@
+- name: Install i3 window manager locally
+  hosts: localhost
+  connection: local
+  become: yes
+  tasks:
+    - name: Update apt repo and cache on localhost
+      ansible.builtin.apt:
+        update_cache: yes
+        cache_valid_time: 3600
+
+    - name: Install i3 window manager
+      ansible.builtin.apt:
+        name: i3
+        state: present
