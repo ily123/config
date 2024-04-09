@@ -12,7 +12,15 @@ sudo apt install ansible
 ansible-playbook playbooks/install-neovim.yaml --ask-become-pass
 ```
 ### Install nvim plugins
-### Install i3 (single monitor)
+```bash
+ansible-playbook playbooks/config-neovim.yaml --ask-become-pass
+```
+
+### Install i3 window manager
+```bash
+ansible-playbook playbooks/install-i3.yaml --ask-become-pass
+```
+
 ### Install z
 ### Install docker
 ### Install AWS CLI / terraform ? you really need tf? really?
