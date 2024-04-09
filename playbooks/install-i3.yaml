@@ -2,6 +2,8 @@
   hosts: localhost
   connection: local
   become: yes
+  vars:
+    home: "{{ lookup('env', 'HOME') }}"
   tasks:
     - name: Update apt repo and cache on localhost
       ansible.builtin.apt:
@@ -21,10 +23,10 @@
     - name: Copy config file to config folder
       ansible.builtin.copy:
         src: "../dotfiles/i3/config"
-        dest: "{{ ansible_env.HOME }}/.config/i3/config"
-        mode: "0777"
+        dest: "{{ home }}/.config/i3/config"
+        mode: "0644"
 
     - name: Install feh image viewer so I can set wallpaper
       ansible.builtin.apt:
-      name: feh
-      state: present
+        name: feh
+        state: present
