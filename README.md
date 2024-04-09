@@ -7,21 +7,20 @@ sudo apt update
 sudo apt install ansible
 ```
 
-### Install nvim
+### nvim
 ```bash
 ansible-playbook playbooks/install-neovim.yaml --ask-become-pass
 ```
-### Install nvim plugins
+### nvim plugins
 ```bash
 ansible-playbook playbooks/config-neovim.yaml --ask-become-pass
 ```
 
-### Install i3 window manager
+### i3 window manager
 ```bash
 ansible-playbook playbooks/install-i3.yaml --ask-become-pass
 ```
 
-### Install z
-### Install docker
+### z
+### docker
 ### Install AWS CLI / terraform ? you really need tf? really?
-### Install cool wallpaper
