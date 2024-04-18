@@ -65,7 +65,7 @@
     - name: Print a message to the user
       ansible.builtin.debug:
         msg: |
-          run this manually: razer-cli --dpi 1225 --brightness 0
+          run this manually: razer-cli -d "Razer Basilisk V3" --dpi 1225 --brightness 0
           I couldn't automate this step.
           razer-cli breaks when ran from Ansible 
           don't try to put it into .bashrc, becasue it is slow (80ms+),
