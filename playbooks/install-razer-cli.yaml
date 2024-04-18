@@ -1,0 +1,72 @@
+# If you install all this, and the mouse doesn't show up in the
+# device list, re-plug the mouse
+
+- name: Setup OpenRazer
+  hosts: localhost
+  connection: local
+  become: yes
+  vars:
+    ppa_repository: "ppa:openrazer/stable"  # Change to ppa:openrazer/daily if desired
+
+  tasks:
+    - name: Install software-properties-gtk (prerequisite for OpenRazer)
+      ansible.builtin.apt:
+        name: software-properties-gtk
+        state: present
+
+    - name: Add OpenRazer repository
+      ansible.builtin.apt_repository:
+        repo: "{{ ppa_repository }}"
+        state: present
+        update_cache: yes
+
+    - name: Ensure 'universe' repository is enabled
+      ansible.builtin.apt_repository:
+        repo: "deb http://archive.ubuntu.com/ubuntu $(lsb_release -cs) universe"
+        state: present
+        update_cache: yes
+
+    - name: Install openrazer-meta
+      ansible.builtin.apt:
+        name: openrazer-meta
+        state: present
+        update_cache: no 
+
+- name: Setup razer-cli and apply mouse settings
+  hosts: localhost
+  connection: local
+  become: yes
+  vars:
+    home: "{{ lookup('env', 'HOME') }}"
+    bashrc_path: "{{ home }}/.bashrc"
+    path_line: 'export PATH="$HOME/.local/bin:$PATH"'
+
+  tasks:
+    - name: Install pip if it doesn't exist
+      ansible.builtin.apt:
+        name: python3-pip
+        state: present
+      when: ansible_facts.packages['python3-pip'] is not defined
+
+    - name: Install razer-cli using pip
+      ansible.builtin.pip:
+        name: razer-cli
+        executable: pip3
+
+    - name: Ensure PATH is set in .bashrc
+      ansible.builtin.lineinfile:
+        path: "{{ bashrc_path }}"
+        line: "{{ path_line }}"
+        create: yes
+        insertafter: EOF
+        state: present
+        regexp: '^export PATH="\\$HOME/.local/bin:\\$PATH"'
+
+    - name: Add razer-cli command to .bashrc to set DPI and brightness on terminal launch
+      ansible.builtin.lineinfile:
+        path: "{{ bashrc_path }}"
+        line: 'razer-cli --dpi 1225 --brightness 0'
+        create: yes
+        insertafter: EOF
+        state: present
+        regexp: '^razer-cli --dpi 1225 --brightness 0$'
