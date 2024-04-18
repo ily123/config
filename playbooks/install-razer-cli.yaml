@@ -62,11 +62,11 @@
         state: present
         regexp: '^export PATH="\\$HOME/.local/bin:\\$PATH"'
 
-    - name: Add razer-cli command to .bashrc to set DPI and brightness on terminal launch
-      ansible.builtin.lineinfile:
-        path: "{{ bashrc_path }}"
-        line: 'razer-cli --dpi 1225 --brightness 0'
-        create: yes
-        insertafter: EOF
-        state: present
-        regexp: '^razer-cli --dpi 1225 --brightness 0$'
+    - name: Print a message to the user
+      ansible.builtin.debug:
+        msg: |
+          run this manually: razer-cli --dpi 1225 --brightness 0
+          I couldn't automate this step.
+          razer-cli breaks when ran from Ansible 
+          don't try to put it into .bashrc, becasue it is slow (80ms+),
+          and you notice the lag
