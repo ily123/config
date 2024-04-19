@@ -20,12 +20,6 @@
         state: present
         update_cache: yes
 
-    - name: Ensure 'universe' repository is enabled
-      ansible.builtin.apt_repository:
-        repo: "deb http://archive.ubuntu.com/ubuntu $(lsb_release -cs) universe"
-        state: present
-        update_cache: yes
-
     - name: Install openrazer-meta
       ansible.builtin.apt:
         name: openrazer-meta
