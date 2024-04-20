@@ -37,3 +37,23 @@ Trying to run this from ansible results in an error. Also, don't try to put this
 ### z
 ### docker
 ### Install AWS CLI / terraform ? you really need tf? really?
+
+---
+
+### ssh key for Github
+Make a new ssh key for every machine.
+
+1. Make new key `ssh-keygen -t ed25519 -C "<github_email@address>"` in ~./ssh/
+2. Upload public half to GitHub (account -> settings -> SSH and CPG keys)
+3. Map Gihub to its key in `~./ssh/config`. Yes, `User` field should be `git`:
+```
+Host github.com
+  HostName github.com
+  User git
+  IdentityFile ~/.ssh/key_file_you_just_made
+  IdentitiesOnly yes
+```
+4. Check that git recognizes the key
+```bash
+ssh -T git@github.com
+```
