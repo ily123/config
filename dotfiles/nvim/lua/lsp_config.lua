@@ -66,7 +66,10 @@ cmp.setup({
 })
 
 -- set up LSP servers
+-- here is instructions for installing popular language servers on your local machine
+-- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#tsserver
 require('lspconfig').pyright.setup({})
+require('lspconfig').tsserver.setup({})
 
 -- set up LSP navigation binds
 local group = vim.api.nvim_create_augroup('user_cmds', {clear = true})
