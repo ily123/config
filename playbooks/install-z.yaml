@@ -1,0 +1,17 @@
+- name: Install Z Bash Tool
+  hosts: localhost
+  connection: local
+  become: yes
+  tasks:
+    - name: Download z.sh
+      get_url:
+        url: https://raw.githubusercontent.com/rupa/z/master/z.sh
+        dest: /usr/local/bin/z.sh
+        mode: '0755'
+
+    - name: Add z.sh to bashrc
+      lineinfile:
+        path: "{{ lookup('env', 'HOME') }}/.bashrc"
+        line: 'source /usr/local/bin/z.sh'
+        state: present
+        insertafter: EOF

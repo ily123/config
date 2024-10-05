@@ -24,6 +24,11 @@ ansible-playbook playbooks/config-neovim.yaml --ask-become-pass
 ansible-playbook playbooks/install-i3.yaml --ask-become-pass
 ```
 
+### z
+```bash
+ansible-playbook playbooks/install-z.yaml --ask-become-pass
+```
+
 ### razer-cli
 ```bash
 ansible-playbook playbooks/install-razer-cli.yaml --ask-become-pass
@@ -34,7 +39,6 @@ razer-cli -d "Razer Basilisk V3" --dpi 1225 --brightness 0
 ```
 Trying to run this from ansible results in an error. Also, don't try to put this in .bashrc, because it's too slow.
 
-### z
 ### docker
 ### Install AWS CLI / terraform ? you really need tf? really?
 
