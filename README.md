@@ -39,6 +39,12 @@ razer-cli -d "Razer Basilisk V3" --dpi 1225 --brightness 0
 ```
 Trying to run this from ansible results in an error. Also, don't try to put this in .bashrc, because it's too slow.
 
+### uv
+https://docs.astral.sh/uv/getting-started/installation/
+```bash
+curl -LsSf https://astral.sh/uv/install.sh | sh
+```
+
 ### docker
 ### Install AWS CLI / terraform ? you really need tf? really?
 
