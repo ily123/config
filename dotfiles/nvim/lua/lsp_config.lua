@@ -70,6 +70,7 @@ cmp.setup({
 -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#tsserver
 require('lspconfig').pyright.setup({})
 require('lspconfig').tsserver.setup({})
+require('lspconfig').ruff.setup({})
 
 -- set up LSP navigation binds
 local group = vim.api.nvim_create_augroup('user_cmds', {clear = true})
