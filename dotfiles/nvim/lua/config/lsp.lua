@@ -71,6 +71,7 @@ cmp.setup({
 require('lspconfig').pyright.setup({})
 require('lspconfig').tsserver.setup({})
 require('lspconfig').ruff.setup({})
+require('lspconfig').lua_ls.setup({})
 
 -- set up LSP navigation binds
 local group = vim.api.nvim_create_augroup('user_cmds', {clear = true})
