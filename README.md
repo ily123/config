@@ -1,8 +1,6 @@
 # config
 Set up my dev environment on Ubuntu 22.04 (x86).
 
-test
-
 ### Ansible
 First, install Ansible.
 
