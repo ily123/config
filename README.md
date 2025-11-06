@@ -84,8 +84,8 @@ sudo ./aws/install
 Git config
 ```
 [core]
-	editor = vim
+  editor = vim
   abbrev = 7
 [alias]
-    lg = log --graph --date=format:%m/%d/%y --pretty=format:'%C(auto)%h%d %C(blue)%ad%C(reset) %s %C(red)(%an)'
+  lg = log --graph --date=format:%m/%d/%y --pretty=format:'%C(auto)%h%d %C(blue)%ad%C(reset) %s %C(red)(%an)'
 ```
