@@ -1,16 +1,4 @@
 #!/usr/bin/env bash
-#  Related variables
-#  ┌───────────┬──────────────────────┐
-#  │ Variable  │       Meaning        │
-#  ├───────────┼──────────────────────┤
-#  │ $@        │ All arguments        │
-#  ├───────────┼──────────────────────┤
-#  │ $#        │ Number of arguments  │
-#  ├───────────┼──────────────────────┤
-#  │ $0        │ Script name          │
-#  ├───────────┼──────────────────────┤
-#  │ $1, $2... │ Individual arguments │
-#  └───────────┴──────────────────────┘
 
 usage() {
   cat <<'EOF'
@@ -27,7 +15,10 @@ EOF
 
 if [[ $# -eq 0 ]]; then
   usage
+  exit 0
 fi
+
+root_dir="$(cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd)"
 
 all=""
 dry=""
@@ -44,7 +35,7 @@ while [[ $# -gt 0 ]]; do
   shift
 done
 
-scripts=`find install.d/ -type f -executable`
+scripts=$(find "${root_dir}/install.d/" -type f -executable)
 
 for s in $scripts; do
   if [[ $dry == "1" ]]; then
