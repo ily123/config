@@ -20,15 +20,35 @@ Usage: install [--dry] [name...]
        install [--dry] --all
 
 Options:
-  --all   run every file in install.d/
+  --all   run every script in install.d/
   --dry   show what will be done
 EOF
 }
 
-usage2() {
-  echo "fds"
-}
-
 if [[ $# -eq 0 ]]; then
   usage
+fi
+
+all=""
+dry=""
+names=()
+
+while [[ $# -gt 0 ]]; do
+  if [[ "$1" == "--dry" ]]; then
+    dry="1"
+  elif [[ "$1" == "--all" ]]; then
+    all="1"
+  else
+    names+=("$1")
+  fi
+  shift
+done
+
+scripts=`find install.d/ -type f -executable`
+
+if [[ $dry == "1" ]]; then
+  for s in $scripts; do
+    echo "[DRY] will run ${s}"
+  done
+  exit 0
 fi
