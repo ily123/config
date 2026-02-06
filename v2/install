@@ -46,9 +46,10 @@ done
 
 scripts=`find install.d/ -type f -executable`
 
-if [[ $dry == "1" ]]; then
-  for s in $scripts; do
+for s in $scripts; do
+  if [[ $dry == "1" ]]; then
     echo "[DRY] will run ${s}"
-  done
-  exit 0
-fi
+  else
+    $s
+  fi
+done
