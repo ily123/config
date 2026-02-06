@@ -37,7 +37,22 @@ done
 
 scripts=$(find "${root_dir}/install.d/" -type f -executable)
 
-for s in $scripts; do
+matched=()
+if [[ $all != "1" ]]; then
+  for s in $scripts; do
+    for name in "${names[@]}"; do
+      s_name=$(basename $s)
+      if [[ "${s_name,,}" == *"${name,,}"* ]]; then
+        matched+=("$s")
+        break
+      fi
+    done
+  done
+else
+  matched=$scripts[@];
+fi
+
+for s in "${matched[@]}"; do
   if [[ $dry == "1" ]]; then
     echo "[DRY] will run ${s}"
   else
