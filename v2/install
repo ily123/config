@@ -49,7 +49,7 @@ if [[ $all != "1" ]]; then
     done
   done
 else
-  matched=$scripts[@];
+  matched=($scripts);
 fi
 
 for s in "${matched[@]}"; do
