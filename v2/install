@@ -42,7 +42,7 @@ if [[ $all != "1" ]]; then
   for s in $scripts; do
     for name in "${names[@]}"; do
       s_name=$(basename $s)
-      if [[ "${s_name,,}" == *"${name,,}"* ]]; then
+      if [[ "${s_name,,}" == "${name,,}"* ]]; then
         matched+=("$s")
         break
       fi
