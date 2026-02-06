@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+#  Related variables
+#  ┌───────────┬──────────────────────┐
+#  │ Variable  │       Meaning        │
+#  ├───────────┼──────────────────────┤
+#  │ $@        │ All arguments        │
+#  ├───────────┼──────────────────────┤
+#  │ $#        │ Number of arguments  │
+#  ├───────────┼──────────────────────┤
+#  │ $0        │ Script name          │
+#  ├───────────┼──────────────────────┤
+#  │ $1, $2... │ Individual arguments │
+#  └───────────┴──────────────────────┘
+
+usage() {
+  cat <<'EOF'
+Run install scripts in install.d/ by name
+
+Usage: install [--dry] [name...]
+       install [--dry] --all
+
+Options:
+  --all   run every file in install.d/
+  --dry   show what will be done
+EOF
+}
+
+usage2() {
+  echo "fds"
+}
+
+if [[ $# -eq 0 ]]; then
+  usage
+fi
