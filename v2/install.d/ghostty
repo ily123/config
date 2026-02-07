@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+mkdir -p ~/.local/bin/
+
+OUT="$HOME/.local/bin/ghostty"
+VERSION="1.2.3"
+LINK="https://github.com/pkgforge-dev/ghostty-appimage/releases/download/v${VERSION}/Ghostty-${VERSION}-x86_64.AppImage"
+
+curl -L -o "${OUT}" "${LINK}"
+chmod +x "${OUT}"
