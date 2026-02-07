@@ -1,0 +1,2 @@
+Alacritty
+https://alacritty.org/config-alacritty.html
