@@ -11,9 +11,10 @@ ghostty                 211ms    203ms    219ms
 ```
 
 Notes:
-- Raw command `time <terminal> -e /bin/true`
-- Benchmark script `./bench_terminal_startup`
+- Raw timing command is `time <terminal> -e /bin/true`
+- See benchmark script `./bench_terminal_startup`
 - Gnome is fast because it runs a persistent background service, cold start is 130ms
+- I am using i3/X11, that may impact startup times
 
 Alacritty config docs:
 - https://alacritty.org/config-alacritty.html
