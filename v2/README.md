@@ -11,8 +11,11 @@ ghostty                 211ms    203ms    219ms
 ```
 
 cmd: `time <terminal> -e /bin/true`
+
 cmd: ./bench_terminal_startup
+
 *gnome runs a persistent background service, cold start is 130ms
 
 Alacritty
+
 https://alacritty.org/config-alacritty.html
