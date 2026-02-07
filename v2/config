@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+root_dir="$(cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd)"
+CONFIRM="0"
+DRY_RUN="0"
+
+if [[ -z $XDG_CONFIG_HOME ]]; then
+  XDG_CONFIG_HOME="${HOME}/.config" 
+fi
+
+while [[ $# -gt 0 ]]; do
+  if [[ $1 == "--confirm" ]]; then
+    CONFIRM="1";
+  elif [[ $1 == "--dry" ]]; then
+    DRY_RUN="1";
+  fi
+  shift
+done
+
+if [[ $CONFIRM == "0" && $DRY_RUN == "0" ]]; then
+  echo "This script will wipe & rewrite contents of ${XDG_CONFIG_HOME}"
+  echo "To confirm you understand, add "--confirm""
+  exit 1
+fi
+
+# iterate through all folders in config.d/,
+# and destructively move them to system .config/
+config_source=$(find "${root_dir}/config.d" -maxdepth 1 -mindepth 1 -type d)
+for c in $config_source; do
+  c_dir_name=$(basename "$c")
+  dest="$XDG_CONFIG_HOME/$c_dir_name" 
+  if [[ $DRY_RUN == "0" ]]; then
+    rm -rf $dest
+    cp -r $c $dest
+    echo "overwrote $dest"
+  else
+    echo "will overwrite $dest"
+  fi
+done
