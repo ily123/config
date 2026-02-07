@@ -1,0 +1,27 @@
+#!/bin/bash
+
+terminals=(alacritty kitty ghostty gnome-terminal)
+
+printf "%-20s %8s %8s %8s\n" "Terminal" "Avg" "Min" "Max"
+printf "%-20s %8s %8s %8s\n" "--------" "---" "---" "---"
+
+for t in "${terminals[@]}"; do
+    if command -v "$t" &>/dev/null; then
+        total=0
+        min=""
+        max=""
+        runs=10
+        for ((i = 0; i < runs; i++)); do
+            ms=$( { time "$t" -e /bin/true; } 2>&1 | grep real | sed 's/.*m\(.*\)s/\1/' )
+            total=$(echo "$total + $ms" | bc)
+            if [ -z "$min" ] || [ "$(echo "$ms < $min" | bc)" -eq 1 ]; then min=$ms; fi
+            if [ -z "$max" ] || [ "$(echo "$ms > $max" | bc)" -eq 1 ]; then max=$ms; fi
+        done
+        avg=$(echo "scale=0; $total * 1000 / $runs" | bc)
+        min_ms=$(echo "$min * 1000 / 1" | bc)
+        max_ms=$(echo "$max * 1000 / 1" | bc)
+        printf "%-20s %6sms %6sms %6sms\n" "$t" "$avg" "$min_ms" "$max_ms"
+    else
+        printf "%-20s %8s\n" "$t" "n/a"
+    fi
+done
