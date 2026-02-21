@@ -1,11 +1,14 @@
 #!/usr/bin/env bash
 
-VERSION="0.11.0"
+# releases -- https://github.com/neovim/neovim/releases
+VERSION="0.11.6"
 OUT="$HOME/.local/bin/nvim"
 
+# app images need FUSE
 sudo apt install -y fuse
-mkdir -p ~/.local/bin/
 
+# grab the app image and stick it in local user bin
+mkdir -p ~/.local/bin/
 curl -L -o "${OUT}" \
     "https://github.com/neovim/neovim/releases/download/v${VERSION}/nvim-linux-x86_64.appimage"
 chmod +x "${OUT}"
