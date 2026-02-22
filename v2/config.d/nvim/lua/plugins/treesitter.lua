@@ -5,8 +5,9 @@
 
 
 --- Configure tree-sitter
---- To compile parsers, it needs tree-sitter-cli installed
 local function config()
+  --- To compile parsers, it needs tree-sitter-cli installed
+  --- Hint: there is a script in root install.d/
   if vim.fn.executable("tree-sitter") == 0 then
     vim.notify(
       "Failed to configure tree-sitter " ..
