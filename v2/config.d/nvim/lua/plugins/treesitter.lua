@@ -7,7 +7,7 @@
 --- Configure tree-sitter
 local function config()
   --- To compile parsers, it needs tree-sitter-cli installed
-  --- Hint: there is a script in root install.d/
+  --- Hint: to install cli tool, there is install.d/tree-sitter-cli
   if vim.fn.executable("tree-sitter") == 0 then
     vim.notify(
       "Failed to configure tree-sitter " ..
@@ -17,8 +17,34 @@ local function config()
     return
   end
 
-  ts = require("nvim-treesitter")
-  ts.install({ "typescript", "python", "vim", "lua", "hcl", "tsx" })
+  -- install parsers
+  local parsers = {
+    "typescript",
+    "python",
+    "vim",
+    "lua",
+    "hcl",
+    "tsx" 
+  }
+  require("nvim-treesitter").install(parsers)
+
+  -- make a list of file types we got a parser for
+  local fileTypes = {}
+  for _, parser in ipairs(parsers) do
+    fts = vim.treesitter.language.get_filetypes(parser)
+    for _, ft in ipairs(fts) do
+      table.insert(fileTypes, ft)
+    end
+  end 
+
+  -- start highlighting when we open one of the file types
+  vim.api.nvim_create_autocmd('FileType', {
+    pattern = fileTypes,
+    callback = function()
+      vim.treesitter.start()
+    end
+  })
+
 end
 
 
