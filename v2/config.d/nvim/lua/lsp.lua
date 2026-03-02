@@ -1,8 +1,15 @@
+-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 -- Language servers need to be installed separately
 -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md
+-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
--- List attached LS features
+-- Force UTF-8 position encoding across all servers
+vim.lsp.config('*', {
+  offset_encoding = 'utf-8',
+})
+
+-- Make command to list features of servers attached to buffer
 vim.api.nvim_create_user_command('LspCapabilities',
   function()
     local lines = {}
@@ -23,13 +30,13 @@ vim.api.nvim_create_user_command('LspCapabilities',
 )
 
 
--- set up LSP binds
+-- set up LSP keybinds and other functionality 
 vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('user_cmds', { clear = true }),
   desc = 'LSP actions',
   callback = function(ev)
 
-    -- make a keybind
+    -- utility fn to make a keybind
     local map = function(mode, keys, action)
       if type(keys) == 'table' then
         for _, key in ipairs(keys) do
@@ -61,12 +68,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
       callback = function() vim.lsp.buf.format({ bufnr = ev.buf }) end,
     })
   end
-})
-
-
--- Force UTF-8 position encoding across all servers
-vim.lsp.config('*', {
-  offset_encoding = 'utf-8',
 })
 
 
