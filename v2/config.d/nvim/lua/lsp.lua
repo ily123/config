@@ -12,7 +12,13 @@ vim.lsp.config('*', {
 -- Make command to list binaries of servers attached to buffer
 vim.api.nvim_create_user_command('LspBinaries',
   function()
-    for _, client in ipairs(vim.lsp.get_clients({ bufnr = 0 })) do
+    local clients = vim.lsp.get_clients({ bufnr = 0 })
+    if #clients == 0 then
+      print("No LSP clients in buffer")
+      return
+    end
+
+    for _, client in ipairs(clients) do
       local cmd = client.config.cmd[1]
       local resolved = vim.fn.exepath(cmd)
       local version = client.server_info and client.server_info.version or '?'
