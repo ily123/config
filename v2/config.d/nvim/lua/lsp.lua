@@ -2,6 +2,27 @@
 -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md
 
 
+-- List attached LS features
+vim.api.nvim_create_user_command('LspCapabilities',
+  function()
+    local lines = {}
+    for _, client in ipairs(vim.lsp.get_clients({ bufnr = 0 })) do
+      table.insert(lines, '=== ' .. client.name .. ' ===')
+      for line in vim.inspect(client.server_capabilities):gmatch('[^\n]+') do
+        table.insert(lines, line)
+      end
+      table.insert(lines, '')
+    end
+    local buf = vim.api.nvim_create_buf(false, true)
+    vim.api.nvim_buf_set_lines(buf, 0, -1, false, lines)
+    vim.api.nvim_set_option_value('filetype', 'lua', { buf = buf })
+    vim.cmd('split')
+    vim.api.nvim_win_set_buf(0, buf)
+  end,
+  { desc = 'Print LSP server capabilities for current buffer' }
+)
+
+
 -- set up LSP binds
 vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('user_cmds', { clear = true }),
@@ -29,9 +50,15 @@ vim.api.nvim_create_autocmd('LspAttach', {
     map('n', ']g', vim.diagnostic.goto_next)
 
     map('n', { '<F2>', '<leader>rn' }, vim.lsp.buf.rename)
-    map({ 'n', 'x' }, '<F3>', function() vim.lsp.buf.format({ async = true }) end)
+    map({ 'n', 'x' }, '<F3>', function() vim.lsp.buf.format() end)
     map({ 'n', 'x' }, '<F4>', vim.lsp.buf.code_action)
   end
+})
+
+
+-- Force UTF-8 position encoding across all servers
+vim.lsp.config('*', {
+  offset_encoding = 'utf-8',
 })
 
 
