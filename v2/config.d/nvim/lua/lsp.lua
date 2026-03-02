@@ -28,6 +28,8 @@ vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('user_cmds', { clear = true }),
   desc = 'LSP actions',
   callback = function(ev)
+
+    -- make a keybind
     local map = function(mode, keys, action)
       if type(keys) == 'table' then
         for _, key in ipairs(keys) do
@@ -38,6 +40,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
       end
     end
 
+    -- keybinds
     map('n', 'K',  vim.lsp.buf.hover)
     map('n', 'gd', vim.lsp.buf.definition)
     map('n', 'gD', vim.lsp.buf.declaration)
@@ -48,10 +51,15 @@ vim.api.nvim_create_autocmd('LspAttach', {
     map('n', 'gl', vim.diagnostic.open_float)
     map('n', '[g', vim.diagnostic.goto_prev)
     map('n', ']g', vim.diagnostic.goto_next)
-
     map('n', { '<F2>', '<leader>rn' }, vim.lsp.buf.rename)
     map({ 'n', 'x' }, '<F3>', function() vim.lsp.buf.format() end)
     map({ 'n', 'x' }, '<F4>', vim.lsp.buf.code_action)
+
+    -- Call format on save
+    vim.api.nvim_create_autocmd('BufWritePre', {
+      buffer = ev.buf,
+      callback = function() vim.lsp.buf.format({ bufnr = ev.buf }) end,
+    })
   end
 })
 
