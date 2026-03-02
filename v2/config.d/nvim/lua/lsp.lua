@@ -9,6 +9,19 @@ vim.lsp.config('*', {
   offset_encoding = 'utf-8',
 })
 
+-- Make command to list binaries of servers attached to buffer
+vim.api.nvim_create_user_command('LspBinaries',
+  function()
+    for _, client in ipairs(vim.lsp.get_clients({ bufnr = 0 })) do
+      local cmd = client.config.cmd[1]
+      local resolved = vim.fn.exepath(cmd)
+      local version = client.server_info and client.server_info.version or '?'
+      print(client.name .. ': ' .. (resolved ~= '' and resolved or 'not found in PATH') .. ' [v' .. version .. ']')
+    end
+  end,
+  { desc = 'Show LSP binary paths for current buffer' }
+)
+
 -- Make command to list features of servers attached to buffer
 vim.api.nvim_create_user_command('LspCapabilities',
   function()
