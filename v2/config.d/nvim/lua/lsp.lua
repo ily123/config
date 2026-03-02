@@ -2,7 +2,7 @@
 -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md
 
 
--- set up LSP navigation binds
+-- set up LSP binds
 vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('user_cmds', { clear = true }),
   desc = 'LSP actions',
@@ -35,7 +35,8 @@ vim.api.nvim_create_autocmd('LspAttach', {
 })
 
 
--- Config taken from
+-- Configure Python stuff
+-- Pyright
 -- https://github.com/neovim/nvim-lspconfig/blob/master/lsp/pyright.lua
 vim.lsp.config.pyright = {
   cmd = { 'pyright-langserver', '--stdio' },
@@ -47,6 +48,16 @@ vim.lsp.config.pyright = {
   },
 }
 
-vim.lsp.enable({ 'pyright' })
+-- Ruff
+-- https://github.com/neovim/nvim-lspconfig/blob/master/lsp/ruff.lua
+vim.lsp.config.ruff = {
+  cmd = { 'ruff', 'server' },
+  filetypes = { 'python' },
+  root_markers = { 'pyproject.toml', 'ruff.toml', '.ruff.toml', '.git' },
+  -- https://docs.astral.sh/ruff/editors/
+  settings = {},
+}
+
+vim.lsp.enable({ 'pyright', 'ruff' })
 
 --vim.lsp.set_log_level("DEBUG")
