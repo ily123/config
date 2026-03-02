@@ -56,13 +56,14 @@ vim.api.nvim_create_autocmd('LspAttach', {
   callback = function(ev)
 
     -- utility fn to make a keybind
-    local map = function(mode, keys, action)
+    local map = function(mode, keys, action, opts)
+      opts = vim.tbl_extend('force', { buffer = ev.buf }, opts or {})
       if type(keys) == 'table' then
         for _, key in ipairs(keys) do
-          vim.keymap.set(mode, key, action, { buffer = ev.buf })
+          vim.keymap.set(mode, key, action, opts)
         end
       else
-        vim.keymap.set(mode, keys, action, { buffer = ev.buf })
+        vim.keymap.set(mode, keys, action, opts)
       end
     end
 
@@ -72,7 +73,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     map('n', 'gD', vim.lsp.buf.declaration)
     map('n', 'gi', vim.lsp.buf.implementation)
     map('n', 'go', vim.lsp.buf.type_definition)
-    map('n', 'gr', vim.lsp.buf.references)
+    map('n', 'gr', vim.lsp.buf.references, { nowait = true })
     map('n', 'gs', vim.lsp.buf.signature_help)
     map('n', 'gl', vim.diagnostic.open_float)
     map('n', '[g', vim.diagnostic.goto_prev)
