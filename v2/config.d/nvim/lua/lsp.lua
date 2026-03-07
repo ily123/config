@@ -7,6 +7,7 @@
 -- Force UTF-8 position encoding across all servers
 vim.lsp.config('*', {
   offset_encoding = 'utf-8',
+  capabilities = require('blink.cmp').get_lsp_capabilities(),
 })
 
 -- Make command to list binaries of servers attached to buffer
