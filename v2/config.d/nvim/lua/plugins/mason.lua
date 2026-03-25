@@ -1,6 +1,6 @@
 local tools = {
-    { "pyright", "1.1.390" },
-    { "ruff",    "0.9.10"  },
+    { "pyright", "1.1.391" },
+    { "ruff",    "0.8.4"  },
 }
 
 local function config()
