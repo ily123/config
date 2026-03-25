@@ -120,6 +120,3 @@ vim.lsp.enable({ 'pyright', 'ruff' })
 --vim.lsp.set_log_level("DEBUG")
 
 
-require("mason").setup({
-  ensure_installed = { "pyright" }
-})
