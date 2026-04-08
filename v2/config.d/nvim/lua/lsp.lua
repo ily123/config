@@ -115,7 +115,22 @@ vim.lsp.config.ruff = {
   settings = {},
 }
 
-vim.lsp.enable({ 'pyright', 'ruff' })
+-- ESLint
+-- https://github.com/neovim/nvim-lspconfig/blob/master/lsp/eslint.lua
+vim.lsp.config.eslint = {
+  cmd = { 'vscode-eslint-language-server', '--stdio' },
+  filetypes = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact' },
+  root_markers = { 'eslint.config.js', 'eslint.config.mjs', '.eslintrc.cjs', '.eslintrc.json', '.eslintrc.js', 'package.json' },
+  settings = {
+    validate = 'on',
+    codeAction = {
+      disableRuleComment = { enable = true },
+      showDocumentation = { enable = true },
+    },
+  },
+}
+
+vim.lsp.enable({ 'pyright', 'ruff', 'eslint' })
 
 --vim.lsp.set_log_level("DEBUG")
 
