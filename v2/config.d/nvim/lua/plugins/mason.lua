@@ -1,6 +1,7 @@
 local tools = {
     { "pyright", "1.1.391" },
     { "ruff",    "0.8.4"  },
+    { "typescript-language-server" },
 }
 
 local function config()

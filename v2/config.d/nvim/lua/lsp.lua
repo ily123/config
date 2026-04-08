@@ -130,7 +130,12 @@ vim.api.nvim_create_autocmd('LspAttach', {
 --  },
 --}
 
-vim.lsp.enable({ 'pyright', 'ruff', 'eslint' })
+vim.lsp.enable({
+  'pyright',
+  'ruff',
+  'eslint',
+  'ts_ls' -- typescript-language-server in Mason
+})
 
 --vim.lsp.set_log_level("DEBUG")
 
