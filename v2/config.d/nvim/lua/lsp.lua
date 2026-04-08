@@ -95,40 +95,40 @@ vim.api.nvim_create_autocmd('LspAttach', {
 -- Configure Python stuff
 -- Pyright
 -- https://github.com/neovim/nvim-lspconfig/blob/master/lsp/pyright.lua
-vim.lsp.config.pyright = {
-  cmd = { 'pyright-langserver', '--stdio' },
-  root_markers = { 'pyproject.toml' },
-  filetypes = { 'python' },
-  -- https://microsoft.github.io/pyright/#/settings
-  settings = {
-    python = {},
-  },
-}
+--vim.lsp.config.pyright = {
+--  cmd = { 'pyright-langserver', '--stdio' },
+--  root_markers = { 'pyproject.toml' },
+--  filetypes = { 'python' },
+--  -- https://microsoft.github.io/pyright/#/settings
+--  settings = {
+--    python = {},
+--  },
+--}
 
 -- Ruff
 -- https://github.com/neovim/nvim-lspconfig/blob/master/lsp/ruff.lua
-vim.lsp.config.ruff = {
-  cmd = { 'ruff', 'server' },
-  filetypes = { 'python' },
-  root_markers = { 'pyproject.toml', 'ruff.toml', '.ruff.toml', '.git' },
-  -- https://docs.astral.sh/ruff/editors/
-  settings = {},
-}
+--vim.lsp.config.ruff = {
+--  cmd = { 'ruff', 'server' },
+--  filetypes = { 'python' },
+--  root_markers = { 'pyproject.toml', 'ruff.toml', '.ruff.toml', '.git' },
+--  -- https://docs.astral.sh/ruff/editors/
+--  settings = {},
+--}
 
 -- ESLint
 -- https://github.com/neovim/nvim-lspconfig/blob/master/lsp/eslint.lua
-vim.lsp.config.eslint = {
-  cmd = { 'vscode-eslint-language-server', '--stdio' },
-  filetypes = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact' },
-  root_markers = { 'eslint.config.js', 'eslint.config.mjs', '.eslintrc.cjs', '.eslintrc.json', '.eslintrc.js', 'package.json' },
-  settings = {
-    validate = 'on',
-    codeAction = {
-      disableRuleComment = { enable = true },
-      showDocumentation = { enable = true },
-    },
-  },
-}
+--vim.lsp.config.eslint = {
+--  cmd = { 'vscode-eslint-language-server', '--stdio' },
+--  filetypes = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact' },
+--  root_markers = { 'eslint.config.js', 'eslint.config.mjs', '.eslintrc.cjs', '.eslintrc.json', '.eslintrc.js', 'package.json' },
+--  settings = {
+--    validate = 'on',
+--    codeAction = {
+--      disableRuleComment = { enable = true },
+--      showDocumentation = { enable = true },
+--    },
+--  },
+--}
 
 vim.lsp.enable({ 'pyright', 'ruff', 'eslint' })
 
