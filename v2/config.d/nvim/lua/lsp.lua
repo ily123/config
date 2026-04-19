@@ -69,7 +69,8 @@ vim.api.nvim_create_autocmd('LspAttach', {
     end
 
     -- keybinds
-    map('n', 'K',  vim.lsp.buf.hover)
+    -- border styles: 'none', 'single', 'double', 'rounded', 'solid', 'shadow'
+    map('n', 'K',  function() vim.lsp.buf.hover({ border = 'rounded' }) end)
     map('n', 'gd', vim.lsp.buf.definition)
     map('n', 'gD', vim.lsp.buf.declaration)
     map('n', 'gi', vim.lsp.buf.implementation)
